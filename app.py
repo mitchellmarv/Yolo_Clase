@@ -15,55 +15,75 @@ st.set_page_config(
 st.markdown("""
 <style>
 :root {
+    color-scheme: light;
     --crema:      #F7EFE5;
     --latte:      #EADBC8;
+    --papel:      #FFFBF6;
     --moka:       #C9A27E;
     --caramelo:   #A9713F;
     --cafe:       #8B5E3C;
-    --chocolate:  #4E342E;
+    --chocolate:  #3B2622;
     --espresso:   #2E1F1B;
 }
 
-/* Fondo general y texto */
+/* ── Fondo general y texto ── */
 .stApp {
-    background-color: var(--crema);
-    color: var(--chocolate);
+    background-color: var(--crema) !important;
+    color: var(--espresso) !important;
 }
-h1, h2, h3, h4, h5, h6, p, label, span, li {
-    color: var(--chocolate);
+header[data-testid="stHeader"] { background-color: var(--crema) !important; }
+
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {
+    color: var(--espresso) !important;
+}
+.stApp p, .stApp li, .stApp label, .stApp span,
+.stApp div[data-testid="stMarkdownContainer"],
+.stApp div[data-testid="stCaptionContainer"] {
+    color: var(--espresso);
 }
 
-/* Barra lateral */
+/* ── Barra lateral ── */
 section[data-testid="stSidebar"] {
-    background-color: var(--latte);
+    background-color: var(--latte) !important;
     border-right: 2px solid var(--moka);
 }
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] li,
+section[data-testid="stSidebar"] div[data-testid="stCaptionContainer"] {
+    color: var(--espresso) !important;
+}
 
-/* Banner principal */
-.hero {
-    background: linear-gradient(135deg, var(--chocolate), var(--cafe));
+/* ── Banner principal (texto claro sobre fondo oscuro) ── */
+.stApp .hero {
+    background: linear-gradient(135deg, #3B2622, #7A5033);
     padding: 2rem 2.2rem;
     border-radius: 18px;
     margin-bottom: 1.5rem;
-    box-shadow: 0 6px 18px rgba(78, 52, 46, 0.25);
+    box-shadow: 0 6px 18px rgba(46, 31, 27, 0.30);
 }
-.hero h1 { color: #FFF8F0 !important; margin: 0 0 .4rem 0; font-size: 2.2rem; }
-.hero p  { color: #F1E3D3 !important; margin: 0; font-size: 1.05rem; }
+.stApp .hero h1 { color: #FFF8F0 !important; margin: 0 0 .4rem 0; font-size: 2.2rem; }
+.stApp .hero p  { color: #F5E9DA !important; margin: 0; font-size: 1.05rem; }
 
-/* Tarjetas */
-.card {
-    background-color: #FFFBF6;
+/* ── Tarjetas (fondo claro, texto oscuro) ── */
+.stApp .card {
+    background-color: var(--papel);
     border: 1px solid var(--moka);
     border-radius: 14px;
     padding: 1.2rem 1.4rem;
     margin-bottom: 1rem;
-    box-shadow: 0 2px 8px rgba(78, 52, 46, 0.08);
+    box-shadow: 0 2px 8px rgba(46, 31, 27, 0.08);
 }
-.card h3 { margin-top: 0; }
+.stApp .card, .stApp .card * { color: var(--espresso) !important; }
+.stApp .card h3 { margin-top: 0; }
 
-/* Caja informativa de la barra lateral */
-.about-box {
-    background-color: #FFFBF6;
+/* ── Cuadro explicativo de la barra lateral ── */
+section[data-testid="stSidebar"] .about-box {
+    background-color: var(--papel);
     border-left: 5px solid var(--caramelo);
     border-radius: 10px;
     padding: .9rem 1rem;
@@ -71,34 +91,81 @@ section[data-testid="stSidebar"] {
     font-size: .93rem;
     line-height: 1.5;
 }
+section[data-testid="stSidebar"] .about-box,
+section[data-testid="stSidebar"] .about-box * {
+    color: var(--espresso) !important;
+}
 
-/* Métricas */
+/* ── Métricas ── */
 div[data-testid="stMetric"] {
-    background-color: #FFFBF6;
+    background-color: var(--papel);
     border: 1px solid var(--moka);
     border-radius: 14px;
     padding: .9rem 1rem;
-    box-shadow: 0 2px 8px rgba(78, 52, 46, 0.08);
+    box-shadow: 0 2px 8px rgba(46, 31, 27, 0.08);
 }
-div[data-testid="stMetricValue"] { color: var(--cafe) !important; }
+div[data-testid="stMetricLabel"], div[data-testid="stMetricLabel"] * { color: var(--chocolate) !important; }
+div[data-testid="stMetricValue"], div[data-testid="stMetricValue"] * { color: var(--cafe) !important; }
 
-/* Botones */
-.stButton > button, div[data-testid="stCameraInput"] button {
-    background-color: var(--cafe);
-    color: #FFF8F0;
-    border: none;
-    border-radius: 10px;
+/* ── Cámara ── */
+div[data-testid="stCameraInput"] {
+    background-color: var(--latte);
+    border: 1px solid var(--moka);
+    border-radius: 14px;
+    padding: .6rem;
 }
-.stButton > button:hover, div[data-testid="stCameraInput"] button:hover {
-    background-color: var(--caramelo);
-    color: #FFF;
-}
+div[data-testid="stCameraInput"] label,
+div[data-testid="stCameraInput"] p { color: var(--espresso) !important; }
 
-/* Imágenes y tablas con bordes suaves */
+/* ── Botones (texto claro sobre café) ── */
+.stButton > button,
+div[data-testid="stCameraInput"] button {
+    background-color: var(--cafe) !important;
+    border: none !important;
+    border-radius: 10px !important;
+}
+.stButton > button *,
+div[data-testid="stCameraInput"] button * { color: #FFF8F0 !important; }
+.stButton > button:hover,
+div[data-testid="stCameraInput"] button:hover { background-color: var(--caramelo) !important; }
+
+/* ── Alertas (st.info, st.error, etc.) ── */
+div[data-testid="stAlert"] {
+    background-color: var(--papel) !important;
+    border: 1px solid var(--moka);
+    border-radius: 12px;
+}
+div[data-testid="stAlert"], div[data-testid="stAlert"] * { color: var(--espresso) !important; }
+
+/* ── Pestañas ── */
+button[data-baseweb="tab"], button[data-baseweb="tab"] * { color: var(--chocolate) !important; }
+button[data-baseweb="tab"][aria-selected="true"], button[data-baseweb="tab"][aria-selected="true"] * {
+    color: var(--cafe) !important; font-weight: 600;
+}
+div[data-baseweb="tab-highlight"] { background-color: var(--cafe) !important; }
+
+/* ── Inputs numéricos ── */
+div[data-baseweb="input"], div[data-baseweb="input"] input, div[data-baseweb="base-input"] {
+    background-color: var(--papel) !important;
+    color: var(--espresso) !important;
+}
+div[data-baseweb="input"] button { background-color: var(--latte) !important; }
+div[data-baseweb="input"] button * { color: var(--espresso) !important; }
+
+/* ── Sliders ── */
+div[data-testid="stSlider"] div[data-testid="stTickBarMin"],
+div[data-testid="stSlider"] div[data-testid="stTickBarMax"],
+div[data-testid="stSlider"] div[data-testid="stThumbValue"] { color: var(--espresso) !important; }
+
+/* ── Imágenes y tablas ── */
 div[data-testid="stImage"] img { border-radius: 12px; border: 2px solid var(--moka); }
-div[data-testid="stDataFrame"] { border: 1px solid var(--moka); border-radius: 10px; }
+div[data-testid="stDataFrame"] {
+    border: 1px solid var(--moka);
+    border-radius: 10px;
+    background-color: var(--papel);
+}
 
-/* Separadores */
+/* ── Separadores ── */
 hr { border-color: var(--moka) !important; }
 </style>
 """, unsafe_allow_html=True)
@@ -207,7 +274,6 @@ if model:
 
         has_detections = boxes is not None and len(boxes) > 0
 
-        # Cálculo de estadísticas
         if has_detections:
             label_names = model.names
             category_count = {}
@@ -234,14 +300,12 @@ if model:
             all_confs = [c for lst in category_conf.values() for c in lst]
             avg_conf = float(np.mean(all_confs))
 
-            # Tarjetas de métricas
             m1, m2, m3 = st.columns(3)
             m1.metric("🧩 Objetos detectados", total_objs)
             m2.metric("🗂️ Categorías distintas", total_cats)
             m3.metric("✅ Confianza promedio", f"{avg_conf:.0%}")
             st.write("")
 
-        # Imagen + tabla/gráfico
         col1, col2 = st.columns(2, gap="large")
 
         with col1:
